@@ -1,0 +1,110 @@
+import dependencies.Versions
+import dependencies.Dependencies
+import dependencies.TestDependencies
+import dependencies.AnnotationProcessing
+import dependencies.AndroidTestDependencies
+import dependencies.TestInstrumentationRunners
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions' // Required to use @Parcelable
+    id 'com.google.gms.google-services'  // Google Services plugin
+    id 'com.google.firebase.crashlytics' // Firebase Crashlytics
+}
+
+android {
+    compileSdkVersion Versions.compile_sdk
+    buildToolsVersion Versions.build_tools
+
+    defaultConfig {
+        applicationId Versions.application_id
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        versionCode Versions.version_code
+        versionName Versions.version_name
+
+        testInstrumentationRunner TestInstrumentationRunners.android_junit
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility Versions.java
+        targetCompatibility Versions.java
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    //implementation project(":dominio")
+    implementation Dependencies.kotlin_stdlib
+    implementation Dependencies.androidx_core_ktx
+    implementation Dependencies.androidx_appcompat
+    implementation Dependencies.material_design
+    implementation Dependencies.constraint_layout
+    implementation Dependencies.swipe_refresh_layout
+    implementation Dependencies.material_dialogs
+    implementation Dependencies.material_dialogs_input
+
+    implementation Dependencies.gson
+
+    implementation  Dependencies.dagger2_core             // Dagger 2 Core
+    implementation  Dependencies.dagger2_android          // Dagger 2 Android
+    implementation  Dependencies.dagger2_android_support
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'// Dagger 2 Android Support
+    kapt AnnotationProcessing.dagger2_compiler            // Dagger 2 Compiler
+    kapt AnnotationProcessing.dagger2_android_processor   // Dagger 2 Android Processor
+
+    implementation platform(Dependencies.firebase_bom)    // Firebase Bill of Materials
+    implementation Dependencies.firebase_analitics
+    implementation Dependencies.firebase_auth
+    implementation Dependencies.firebase_firestore
+    implementation Dependencies.firebase_crashlytics
+
+    implementation Dependencies.kotlin_coroutines
+    implementation Dependencies.kotlin_coroutines_android
+    implementation Dependencies.kotlin_coroutines_play_services
+
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofit_gson_converter
+    implementation Dependencies.retrofit_logging_interceptor
+
+    /*Glide*/
+    implementation Dependencies.glide
+    annotationProcessor AnnotationProcessing.glide
+
+    /*Jetpack Room*/
+    implementation Dependencies.room
+    implementation Dependencies.room_extensions
+    testImplementation Dependencies.room_testing
+    kapt Dependencies.room_compiler
+
+    /*Jetpack Navigation*/
+    implementation Dependencies.navigation_fragment  // Navigation Fragment
+    implementation Dependencies.navigation_ui        // Navigation UI
+
+    // Test
+    testImplementation TestDependencies.junit
+    testImplementation TestDependencies.mockk
+    testImplementation TestDependencies.jupiter_api
+    testImplementation TestDependencies.jupiter_params
+    testImplementation TestDependencies.junit4
+    testRuntimeOnly TestDependencies.jupiter_engine
+
+    androidTestImplementation AndroidTestDependencies.junit
+    androidTestImplementation AndroidTestDependencies.espresso
+
+    // Debugging Tools
+    debugImplementation "com.infinum.dbinspector:dbinspector:5.0.1"
+    releaseImplementation "com.infinum.dbinspector:dbinspector-no-op:5.0.1"
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+}

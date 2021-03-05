@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.eahm.learn.framework.presentation.productlist.ProductListFragment"
+        android:label="fragment_product_list"
+        tools:layout="@layout/fragment_product_list" >
+        <action
+            android:id="@+id/action_productListFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_orderListProviderFragment"
+            app:destination="@id/orderListProviderFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_userProductListFragment"
+            app:destination="@id/userProductListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.eahm.learn.framework.presentation.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_productListFragment"
+            app:destination="@id/productListFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="com.eahm.learn.framework.presentation.shoppingcart.ShoppingCartFragment"
+        android:label="ShoppingCartFragment"
+        tools:layout="@layout/fragment_shopping_cart">
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.eahm.learn.framework.presentation.productdetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="product"
+            app:argType="com.eahm.learn.business.domain.model.Product"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.eahm.learn.framework.presentation.authentication.AuthFragment"
+        android:label="AuthFragment"
+        tools:layout="@layout/fragment_auth">
+        <action
+            android:id="@+id/action_authFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.eahm.learn.framework.presentation.product.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product"/>
+    <fragment
+        android:id="@+id/orderListProviderFragment"
+        android:name="com.eahm.learn.framework.presentation.providerorderlist.ProviderOrderListFragment"
+        android:label="OrderListProviderFragment"
+        tools:layout="@layout/fragment_order_list_provider"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.eahm.learn.framework.presentation.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.eahm.learn.framework.presentation.orderlist.OrderListFragment"
+        android:label="OrderListFragment"
+        tools:layout="@layout/fragment_order_list">
+        <action
+            android:id="@+id/action_orderListFragment_to_orderListDetailFragment"
+            app:destination="@id/orderListDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProductListFragment"
+        android:name="com.eahm.learn.framework.presentation.providerproductlist.UserProductListFragment"
+        android:label="UserProductListFragment"
+        tools:layout="@layout/fragment_user_product_list">
+        <action
+            android:id="@+id/action_userProductListFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderListDetailFragment"
+        android:name="com.eahm.learn.framework.presentation.orderlistdetail.OrderListDetailFragment"
+        android:label="OrderListDetailFragment"
+        tools:layout="@layout/order_list_detail_fragment">
+        <argument
+            android:name="currentOrder"
+            app:argType="com.eahm.learn.business.domain.model.Order"
+            app:nullable="true" />
+    </fragment>
+</navigation>
